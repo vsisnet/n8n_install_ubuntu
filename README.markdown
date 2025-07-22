@@ -26,24 +26,12 @@ This script automates the installation of n8n on Ubuntu using Docker and Docker 
 - Starts the containers in detached mode.
 
 ##### Usage
-1. Download the script from GitHub:
-   ```bash
-   curl -O https://raw.githubusercontent.com/vsisnet/n8n_install_ubuntu/main/n8n_install_ubuntu.sh
-   ```
-   or
-   ```bash
-   wget https://raw.githubusercontent.com/vsisnet/n8n_install_ubuntu/main/n8n_install_ubuntu.sh
-   ```
-2. Make the script executable:
-   ```bash
-   chmod +x n8n_install_ubuntu.sh
-   ```
-3. Run the script with root privileges:
-   ```bash
-   sudo ./n8n_install_ubuntu.sh
-   ```
-4. Enter your domain/subdomain when prompted.
-5. After successful installation, access n8n at `https://<your-domain>`.
+Run the following single command to download, make executable, and execute the script:
+```bash
+curl -O https://raw.githubusercontent.com/vsisnet/n8n_install_ubuntu/main/n8n_install_ubuntu.sh && chmod +x n8n_install_ubuntu.sh && sudo ./n8n_install_ubuntu.sh
+```
+1. Enter your domain/subdomain when prompted.
+2. After successful installation, access n8n at `https://<your-domain>`.
 
 ##### Notes
 - Ensure your domain's DNS (A record) points to your server's public IP before running the script.
@@ -120,24 +108,12 @@ Script này tự động hóa việc cài đặt n8n trên Ubuntu bằng Docker 
 - Khởi động các container ở chế độ nền.
 
 ##### Cách sử dụng
-1. Tải script từ GitHub:
-   ```bash
-   curl -O https://raw.githubusercontent.com/vsisnet/n8n_install_ubuntu/main/n8n_install_ubuntu.sh
-   ```
-   hoặc
-   ```bash
-   wget https://raw.githubusercontent.com/vsisnet/n8n_install_ubuntu/main/n8n_install_ubuntu.sh
-   ```
-2. Phân quyền thực thi cho script:
-   ```bash
-   chmod +x n8n_install_ubuntu.sh
-   ```
-3. Chạy script với quyền root:
-   ```bash
-   sudo ./n8n_install_ubuntu.sh
-   ```
-4. Nhập tên miền/tên miền phụ khi được yêu cầu.
-5. Sau khi cài đặt thành công, truy cập n8n tại `https://<your-domain>`.
+Chạy lệnh duy nhất sau để tải, phân quyền, và thực thi script:
+```bash
+curl -O https://raw.githubusercontent.com/vsisnet/n8n_install_ubuntu/main/n8n_install_ubuntu.sh && chmod +x n8n_install_ubuntu.sh && sudo ./n8n_install_ubuntu.sh
+```
+1. Nhập tên miền/tên miền phụ khi được yêu cầu.
+2. Sau khi cài đặt thành công, truy cập n8n tại `https://<your-domain>`.
 
 ##### Lưu ý
 - Đảm bảo bản ghi DNS (A record) của tên miền trỏ đến IP công khai của máy chủ trước khi chạy script.
@@ -155,7 +131,7 @@ Script này nâng cấp cài đặt n8n hiện có lên phiên bản mới nhấ
 - Khởi động lại các container với image đã cập nhật.
 
 ##### Cách sử dụng
-1. Script `upgrade_n8n.sh` đã được tải và thiết metering lập bởi `n8n_install_ubuntu.sh` trong `/home/n8n`.
+1. Script `upgrade_n8n.sh` đã được tải và thiết lập bởi `n8n_install_ubuntu.sh` trong `/home/n8n`.
 2. Chạy script với quyền root:
    ```bash
    sudo /home/n8n/upgrade_n8n.sh
