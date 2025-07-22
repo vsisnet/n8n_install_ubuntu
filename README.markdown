@@ -13,7 +13,7 @@ This repository contains two Bash scripts to install and upgrade [n8n](https://n
 ### Scripts
 
 #### 1. `n8n_install_ubuntu.sh`
-This script automates the installation of n8n on Ubuntu using Docker and Docker Compose.
+This script automates the installation of n8n on Ubuntu using Docker and Docker Compose. It also downloads the `upgrade_n8n.sh` script automatically for future upgrades.
 
 ##### Features
 - Checks for root privileges.
@@ -22,6 +22,7 @@ This script automates the installation of n8n on Ubuntu using Docker and Docker 
 - Creates a directory (`/home/n8n`) for n8n configuration and data.
 - Sets up a `docker-compose.yml` file to run n8n and Caddy containers.
 - Configures Caddy for automatic HTTPS with a reverse proxy to n8n.
+- Downloads and sets up `upgrade_n8n.sh` in `/home/n8n` with executable permissions.
 - Starts the containers in detached mode.
 
 ##### Usage
@@ -47,10 +48,10 @@ This script automates the installation of n8n on Ubuntu using Docker and Docker 
 ##### Notes
 - Ensure your domain's DNS (A record) points to your server's public IP before running the script.
 - The script sets the timezone to `Asia/Ho_Chi_Minh`. Modify the `GENERIC_TIMEZONE` in `docker-compose.yml` if needed.
-- Learn n8n basics at https://blog.vsis.net/ 
+- Learn n8n basics at [vsis.net](https://vsis.net).
 
 #### 2. `upgrade_n8n.sh`
-This script upgrades an existing n8n installation to the latest version while preserving data.
+This script upgrades an existing n8n installation to the latest version while preserving data. It is automatically downloaded by `n8n_install_ubuntu.sh` into `/home/n8n`.
 
 ##### Features
 - Checks for root privileges and the existence of the n8n directory.
@@ -60,27 +61,12 @@ This script upgrades an existing n8n installation to the latest version while pr
 - Restarts the containers with the updated images.
 
 ##### Usage
-1. Download the script from GitHub:
-   ```bash
-   curl -O https://raw.githubusercontent.com/vsisnet/n8n_install_ubuntu/main/upgrade_n8n.sh
-   ```
-   or
-   ```bash
-   wget https://raw.githubusercontent.com/vsisnet/n8n_install_ubuntu/main/upgrade_n8n.sh
-   ```
-2. Move the script to the n8n directory:
-   ```bash
-   mv upgrade_n8n.sh /home/n8n/
-   ```
-3. Make the script executable:
-   ```bash
-   chmod +x /home/n8n/upgrade_n8n.sh
-   ```
-4. Run the script with root privileges:
+1. The `upgrade_n8n.sh` script is already downloaded and set up by `n8n_install_ubuntu.sh` in `/home/n8n`.
+2. Run the script with root privileges:
    ```bash
    sudo /home/n8n/upgrade_n8n.sh
    ```
-5. Verify the upgrade by accessing `https://<your-domain>`.
+3. Verify the upgrade by accessing `https://<your-domain>`.
 
 ##### Notes
 - Backups are stored in `/home/n8n` with names like `n8n_backup_YYYYMMDD_HHMMSS.tar.gz`.
@@ -93,9 +79,9 @@ This script upgrades an existing n8n installation to the latest version while pr
 ### Troubleshooting
 - **Domain not pointing to server**: Verify DNS settings using `dig` or `nslookup`. Update the A record to your server's public IP.
 - **Docker issues**: Check logs with:
-   ```bash
-   docker-compose -f /home/n8n/docker-compose.yml logs
-   ```
+  ```bash
+  docker-compose -f /home/n8n/docker-compose.yml logs
+  ```
 - **Caddy HTTPS issues**: Ensure ports 80 and 443 are open and not blocked by a firewall.
 
 ### Contributing
@@ -121,7 +107,7 @@ Kho lưu trữ này chứa hai script Bash để cài đặt và nâng cấp [n8
 ### Các Script
 
 #### 1. `n8n_install_ubuntu.sh`
-Script này tự động hóa việc cài đặt n8n trên Ubuntu bằng Docker và Docker Compose.
+Script này tự động hóa việc cài đặt n8n trên Ubuntu bằng Docker và Docker Compose. Script cũng tự động tải script `upgrade_n8n.sh` để sử dụng cho việc nâng cấp sau này.
 
 ##### Tính năng
 - Kiểm tra quyền root.
@@ -130,6 +116,7 @@ Script này tự động hóa việc cài đặt n8n trên Ubuntu bằng Docker 
 - Tạo thư mục (`/home/n8n`) để lưu cấu hình và dữ liệu n8n.
 - Thiết lập file `docker-compose.yml` để chạy các container n8n và Caddy.
 - Cấu hình Caddy để tự động sử dụng HTTPS với reverse proxy tới n8n.
+- Tải và thiết lập `upgrade_n8n.sh` trong `/home/n8n` với quyền thực thi.
 - Khởi động các container ở chế độ nền.
 
 ##### Cách sử dụng
@@ -155,10 +142,10 @@ Script này tự động hóa việc cài đặt n8n trên Ubuntu bằng Docker 
 ##### Lưu ý
 - Đảm bảo bản ghi DNS (A record) của tên miền trỏ đến IP công khai của máy chủ trước khi chạy script.
 - Script đặt múi giờ là `Asia/Ho_Chi_Minh`. Sửa `GENERIC_TIMEZONE` trong `docker-compose.yml` nếu cần.
-- Tìm hiểu cơ bản về n8n tại https://blog.vsis.net/
+- Tìm hiểu cơ bản về n8n tại [vsis.net](https://vsis.net).
 
 #### 2. `upgrade_n8n.sh`
-Script này nâng cấp cài đặt n8n hiện có lên phiên bản mới nhất mà vẫn giữ nguyên dữ liệu.
+Script này nâng cấp cài đặt n8n hiện có lên phiên bản mới nhất mà vẫn giữ nguyên dữ liệu. Script được tự động tải bởi `n8n_install_ubuntu.sh` và đặt trong `/home/n8n`.
 
 ##### Tính năng
 - Kiểm tra quyền root và sự tồn tại của thư mục n8n.
@@ -168,27 +155,12 @@ Script này nâng cấp cài đặt n8n hiện có lên phiên bản mới nhấ
 - Khởi động lại các container với image đã cập nhật.
 
 ##### Cách sử dụng
-1. Tải script từ GitHub:
-   ```bash
-   curl -O https://raw.githubusercontent.com/vsisnet/n8n_install_ubuntu/main/upgrade_n8n.sh
-   ```
-   hoặc
-   ```bash
-   wget https://raw.githubusercontent.com/vsisnet/n8n_install_ubuntu/main/upgrade_n8n.sh
-   ```
-2. Di chuyển script vào thư mục n8n:
-   ```bash
-   mv upgrade_n8n.sh /home/n8n/
-   ```
-3. Phân quyền thực thi cho script:
-   ```bash
-   chmod +x /home/n8n/upgrade_n8n.sh
-   ```
-4. Chạy script với quyền root:
+1. Script `upgrade_n8n.sh` đã được tải và thiết metering lập bởi `n8n_install_ubuntu.sh` trong `/home/n8n`.
+2. Chạy script với quyền root:
    ```bash
    sudo /home/n8n/upgrade_n8n.sh
    ```
-5. Kiểm tra nâng cấp bằng cách truy cập `https://<your-domain>`.
+3. Kiểm tra nâng cấp bằng cách truy cập `https://<your-domain>`.
 
 ##### Lưu ý
 - Bản sao lưu được lưu trong `/home/n8n` với tên như `n8n_backup_YYYYMMDD_HHMMSS.tar.gz`.
