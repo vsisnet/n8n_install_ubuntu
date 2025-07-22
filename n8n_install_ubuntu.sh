@@ -1,9 +1,11 @@
 #!/bin/bash
+
 # Kiểm tra xem script có được chạy với quyền root không
 if [[ $EUID -ne 0 ]]; then
    echo "This script needs to be run with root privileges" 
    exit 1
 fi
+
 # Hàm kiểm tra domain
 check_domain() {
     local domain=$1
@@ -16,6 +18,7 @@ check_domain() {
         return 1  # Domain chưa trỏ đúng
     fi
 }
+
 # Nhận input domain từ người dùng
 read -p "Enter your domain or subdomain: " DOMAIN
 
@@ -97,6 +100,16 @@ ${DOMAIN} {
 }
 EOF
 
+# Tải file upgrade_n8n.sh từ GitHub
+echo "Downloading upgrade_n8n.sh from GitHub..."
+curl -o $N8N_DIR/upgrade_n8n.sh https://raw.githubusercontent.com/vsisnet/n8n_install_ubuntu/main/upgrade_n8n.sh || {
+    echo "Failed to download upgrade_n8n.sh. Please download it manually from https://github.com/vsisnet/n8n_install_ubuntu"
+    exit 1
+}
+
+# Phân quyền thực thi cho upgrade_n8n.sh
+chmod +x $N8N_DIR/upgrade_n8n.sh
+
 # Đặt quyền cho thư mục n8n
 chown -R 1000:1000 $N8N_DIR
 chmod -R 755 $N8N_DIR
@@ -106,7 +119,15 @@ cd $N8N_DIR
 docker-compose up -d
 
 echo ""
-echo "N8n của bạn đã được cài đặt thành công!                        "
-echo "Hãy truy cập: https://${DOMAIN}                             "
-echo "Hãy truy cập: https://blog.vsis.net để tham khảo thêm các bài viết hay về N8N          "
-echo "║                                                             
+echo "╔═════════════════════════════════════════════════════════════╗"
+echo "║                                                             "
+echo "║  ✅ N8n đã được cài đặt thành công!                         "
+echo "║                                                             "
+echo "║  🌐 Truy cập: https://${DOMAIN}                             "
+echo "║                                                             "
+echo "║  🔄 Để nâng cấp n8n, chạy: sudo $N8N_DIR/upgrade_n8n.sh     "
+echo "║                                                             "
+echo "║  📚 Tham khảo thêm các bài viết n8n trên: https://blog.vsis.net                        "
+echo "║                                                             "
+echo "╚═════════════════════════════════════════════════════════════╝"
+echo ""
