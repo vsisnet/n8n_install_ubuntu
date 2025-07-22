@@ -47,7 +47,7 @@ This script automates the installation of n8n on Ubuntu using Docker and Docker 
 ##### Notes
 - Ensure your domain's DNS (A record) points to your server's public IP before running the script.
 - The script sets the timezone to `Asia/Ho_Chi_Minh`. Modify the `GENERIC_TIMEZONE` in `docker-compose.yml` if needed.
-- Learn n8n basics at [n8n-basic.mecode.pro](https://n8n-basic.mecode.pro).
+- Learn n8n basics at https://blog.vsis.net/ 
 
 #### 2. `upgrade_n8n.sh`
 This script upgrades an existing n8n installation to the latest version while preserving data.
@@ -155,7 +155,7 @@ Script này tự động hóa việc cài đặt n8n trên Ubuntu bằng Docker 
 ##### Lưu ý
 - Đảm bảo bản ghi DNS (A record) của tên miền trỏ đến IP công khai của máy chủ trước khi chạy script.
 - Script đặt múi giờ là `Asia/Ho_Chi_Minh`. Sửa `GENERIC_TIMEZONE` trong `docker-compose.yml` nếu cần.
-- Tìm hiểu cơ bản về n8n tại [n8n-basic.mecode.pro](https://n8n-basic.mecode.pro).
+- Tìm hiểu cơ bản về n8n tại https://blog.vsis.net/
 
 #### 2. `upgrade_n8n.sh`
 Script này nâng cấp cài đặt n8n hiện có lên phiên bản mới nhất mà vẫn giữ nguyên dữ liệu.
